@@ -1,0 +1,22 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/product/category/suggestion/get",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-07-28 17:02:37)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "code": "0",
+    "data": {
+      "categorySuggestions": [
+        {
+          "categoryPath": "categoryPath",
+          "categoryName": "T-Shirt",
+          "categoryId": "2342"
+        }
+      ]
+    },
+    "request_id": "0ba2887315178178017221014"
+  }
+}

@@ -1,0 +1,1260 @@
+{
+  "_source": {
+    "url": "https://isvconsole.lazada.com/handler/share/apidoc/getApi.json?path=<path> (the errorCodes of every endpoint this gem calls) and https://open.lazada.com/apps/doc/doc?nodeId=10551&docId=239755 (FAQ #8, #9, #12, #14, #5)",
+    "pulled": "2026-09-20",
+    "origin": "official documentation error tables"
+  },
+  "pairs": [
+    {
+      "code": "MissingParameter",
+      "message": "the input parameter “sign” that is mandatory for processing this request is not supplied",
+      "endpoints": [
+        "/auth/token/create"
+      ]
+    },
+    {
+      "code": "IncompleteSignature",
+      "message": "The request signature does not conform to lazop standards",
+      "endpoints": [
+        "/auth/token/create"
+      ]
+    },
+    {
+      "code": "InvalidCode",
+      "message": "Invalid authorization code",
+      "endpoints": [
+        "/auth/token/create"
+      ]
+    },
+    {
+      "code": "IllegalRefreshToken",
+      "message": "The specified refresh token is invalid or expired",
+      "endpoints": [
+        "/auth/token/refresh"
+      ]
+    },
+    {
+      "code": "AUTH_TYPE_UNSUPPORTED",
+      "message": "XXX can only be authorized by market, not support refresh",
+      "endpoints": [
+        "/auth/token/refresh"
+      ]
+    },
+    {
+      "code": "AUTH_TYPE_UNSUPPORTED",
+      "message": "appkey can only be authorized by market, not support refresh",
+      "endpoints": [
+        "/auth/token/refresh"
+      ]
+    },
+    {
+      "code": "57",
+      "message": "E057: No attribute sets linked to that category.",
+      "endpoints": [
+        "/category/attributes/get"
+      ]
+    },
+    {
+      "code": "4228",
+      "message": "Query category is not active",
+      "endpoints": [
+        "/category/attributes/get"
+      ]
+    },
+    {
+      "code": "4227",
+      "message": "Query category is null",
+      "endpoints": [
+        "/category/attributes/get"
+      ]
+    },
+    {
+      "code": "30",
+      "message": "E030: Empty Request",
+      "endpoints": [
+        "/image/upload",
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "300",
+      "message": "E300: Upload Image Failed",
+      "endpoints": [
+        "/image/upload"
+      ]
+    },
+    {
+      "code": "303",
+      "message": "E303: The image is too large",
+      "endpoints": [
+        "/image/upload"
+      ]
+    },
+    {
+      "code": "1000",
+      "message": "Internal Application Error",
+      "endpoints": [
+        "/image/upload",
+        "/product/category/suggestion/get",
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "302",
+      "message": "Not supported URL",
+      "endpoints": [
+        "/image/upload"
+      ]
+    },
+    {
+      "code": "303",
+      "message": "The image is too large",
+      "endpoints": [
+        "/image/upload"
+      ]
+    },
+    {
+      "code": "16",
+      "message": "E016: \"%s\" Invalid Order ID",
+      "endpoints": [
+        "/order/get",
+        "/order/items/get"
+      ]
+    },
+    {
+      "code": "6",
+      "message": "E006: System Error",
+      "endpoints": [
+        "/order/get",
+        "/order/items/get"
+      ]
+    },
+    {
+      "code": "16",
+      "message": "Invalid Order ID",
+      "endpoints": [
+        "/order/get",
+        "/order/items/get"
+      ]
+    },
+    {
+      "code": "14",
+      "message": "E014: \"%s\" Invalid Offset",
+      "endpoints": [
+        "/orders/get",
+        "/products/get"
+      ]
+    },
+    {
+      "code": "17",
+      "message": "E017: \"%s\" Invalid Date Format",
+      "endpoints": [
+        "/orders/get",
+        "/products/get"
+      ]
+    },
+    {
+      "code": "19",
+      "message": "E019: \"%s\" Invalid Limit",
+      "endpoints": [
+        "/orders/get",
+        "/products/get"
+      ]
+    },
+    {
+      "code": "36",
+      "message": "E036: Invalid status filter",
+      "endpoints": [
+        "/orders/get",
+        "/products/get"
+      ]
+    },
+    {
+      "code": "74",
+      "message": "E074: Invalid sort direction.",
+      "endpoints": [
+        "/orders/get"
+      ]
+    },
+    {
+      "code": "75",
+      "message": "E075: Invalid sort filter.",
+      "endpoints": [
+        "/orders/get"
+      ]
+    },
+    {
+      "code": "SellerNotVerified",
+      "message": "Seller not verified,please check seller status",
+      "endpoints": [
+        "/orders/get",
+        "/products/get"
+      ]
+    },
+    {
+      "code": "6",
+      "message": "Invalid status filter",
+      "endpoints": [
+        "/orders/get"
+      ]
+    },
+    {
+      "code": "17",
+      "message": "Invalid Date Format",
+      "endpoints": [
+        "/orders/get"
+      ]
+    },
+    {
+      "code": "701",
+      "message": "E701: Empty category suggestion.",
+      "endpoints": [
+        "/product/category/suggestion/get"
+      ]
+    },
+    {
+      "code": "901",
+      "message": "Limit service request speed in server side temporarily.",
+      "endpoints": [
+        "/product/category/suggestion/get",
+        "/product/create",
+        "/product/deactivate",
+        "/product/item/get",
+        "/product/price_quantity/update",
+        "/product/update",
+        "/products/get"
+      ]
+    },
+    {
+      "code": "701",
+      "message": "Empty category suggestion.",
+      "endpoints": [
+        "/product/category/suggestion/get"
+      ]
+    },
+    {
+      "code": "1",
+      "message": "E001: Parameter %s is mandatory",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "5",
+      "message": "E005: Invalid Request Format",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update",
+        "/products/get"
+      ]
+    },
+    {
+      "code": "6",
+      "message": "E006: Unexpected internal error",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update",
+        "/products/get"
+      ]
+    },
+    {
+      "code": "201",
+      "message": "E201: %s Invalid CategoryId",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "202",
+      "message": "E202: %s Invalid SPUId",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "205",
+      "message": "E205: SPU does not exist",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "206",
+      "message": "E206: Different category id in SPU and PrimaryCategory",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "500",
+      "message": "E500: Create product failed",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "502",
+      "message": "E502: Search SPU failed",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "512",
+      "message": "E512: BIZ_CHECK_MANGROVE_RULE_QC",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "901",
+      "message": "E901: The request is too frequent, or the requested functionality is temporarily disabled.",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update",
+        "/products/get"
+      ]
+    },
+    {
+      "code": "4104",
+      "message": "BIZ_CHECK_PRICE_PRECISION_INVALID",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4105",
+      "message": "BIZ_CHECK_SELLER_SKU_DUPLICATE",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4106",
+      "message": "CHK_CATPROP_CPV_INPUT_SIZE_LIMIT",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4107",
+      "message": "CHECK_CAT_PROP_INVALID_NUMBER",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4108",
+      "message": "CHK_BASIC_REQUIRED",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4109",
+      "message": "CHK_SKU_PROPS_NOT_MATCH_SALE_PROP",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4110",
+      "message": "BIZ_CHECK_CAT_PROP_MANDATORY",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4111",
+      "message": "CHK_CATPROP_CPV_TEXT_REPEAT",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4112",
+      "message": "CHK_SKU_PROPS_DUPLICATE",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4113",
+      "message": "CHK_SKU_PROPS_NOT_IDENTICAL",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4114",
+      "message": "BIZ_CHECK_PRICE_SAMPLE_NON_ZERO",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4115",
+      "message": "CHK_CATPROP_CPV_NOT_ENUM",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4116",
+      "message": "BIZ_CHECK_MAIN_IMAGE_DUPLICATE",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4117",
+      "message": "BIZ_CHECK_SPECIAL_PRICE_FROM_DATE_AFTER_TO_DATE",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4118",
+      "message": "BIZ_CHECK_PRICE_IS_ZERO",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4119",
+      "message": "BIZ_CHECK_SPECIAL_PRICE_RATE_OUT_OF_RANGE",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4120",
+      "message": "CHK_CATPROP_CPV_MAX_LEGNTH",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4121",
+      "message": "BIZ_CHECK_SPECIAL_PRICE_PRECISION_INVALID",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4122",
+      "message": "BIZ_CHECK_VIRTUAL_BUNDLE_SKU_SUB_OVER_LIMIT",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4123",
+      "message": "BIZ_CHECK_MANGROVE_RULE",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4124",
+      "message": "BIZ_CHECK_MANGROVE_RULE_QC",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4125",
+      "message": "THD_IC_F_IC_DOMAIN_PROPERTY_002",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4126",
+      "message": "THD_IC_F_IC_INFRA_PRODUCT_036",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4127",
+      "message": "THD_IC_F_IC_SCENE_PUBLISH_012",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4128",
+      "message": "THD_IC_F_IC_DOMAIN_ACTOR_006",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4129",
+      "message": "BIZ_CHECK_PROP_SPECIAL_CHAR",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4130",
+      "message": "BIZ_CHECK_OFFICIAL_STORE_BRAND_UNAUTHORIZED",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4131",
+      "message": "BIZ_CHECK_CAT_PROP_SENSITIVE_WORDS",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4132",
+      "message": "Invalid Request Format",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4133",
+      "message": "Invalid variation",
+      "endpoints": [
+        "/product/create",
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4134",
+      "message": "Please select the last level category.",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4135",
+      "message": "THD_IC_ERR",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4136",
+      "message": "SELLER_SKU_NOT_FOUND",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4137",
+      "message": "ITEM_NOT_FOUND",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4138",
+      "message": "BIZ_CHECK_EXIST_OUTER_IMAGE",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4139",
+      "message": "BIZ_CHECK_MAIN_IMAGE_REQUIRE",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4140",
+      "message": "CHK_ENUM_PROP_VALUE_NOT_IN_OPTION",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4141",
+      "message": "THD_IC_ERR_F_IC_INFRA_PRODUCT_036",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4142",
+      "message": "THD_BRAND_ID_IS_NOT_VALID_IN_CATEGORY",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4143",
+      "message": "BIZ_CHECK_SALEPROP_ATTRIBUTE_INVALID",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4144",
+      "message": "BIZ_CHECK_SKU_NOT_CONTAIN_SALEPROP",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4145",
+      "message": "BIZ_CHECK_SALEPROP_AND_OLD_PARAM_REPEAT",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4146",
+      "message": "BIZ_CHECK_SALEPROP_NOT_SUPPORT_THUMBNAIL",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4147",
+      "message": "THD_IC_ERR_F_IC_SERVICE_EDIT_002",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4148",
+      "message": "BIZ_CHECK_ITEM_HAS_REACH_LIMIT",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4149",
+      "message": "BIZ_CHECK_PACKAGE_DECIMAL_INVALID",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4150",
+      "message": "SELLER_SKU_INVALID",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4151",
+      "message": "BIZ_CHECK_MTEE_RULE_QC",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4152",
+      "message": "THD_INVENTORY_ERR_INV_PARAM_ILLEGAL",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4153",
+      "message": "THD_IC_ERR_FC_IC_SKU_IMAGE_001",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4154",
+      "message": "SYS_REQUEST_TOO_FAST",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4155",
+      "message": "BIZ_CHECK_NO_EDIT_ITEM_LOCK",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4156",
+      "message": "C035: No brand cannot be selected",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4157",
+      "message": "BIZ_CHECK_SPECIAL_PRICE_GREATER_THAN_PRICE",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4158",
+      "message": "THD_IC_ERR_F_DOMAIN_IMAGE_00_01_003",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4159",
+      "message": "IC_EXCEPTION",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4160",
+      "message": "THD_IC_ERR_F_PRODUCT_00_15_004",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4161",
+      "message": "VARIATION_CATEGORY_ATTRIBUTE_INVALID",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4162",
+      "message": "THD_IC_ERR_F_IC_ABILITY_PG",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4163",
+      "message": "BIZ_CHECK_RESTRICTED_CATEGORY",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4164",
+      "message": "BIZ_CHECK_MAX_PACKAGE_WEIGHT",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4165",
+      "message": "BIZ_CHECK_MAX_PACKAGE_DIMENISIONS",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4166",
+      "message": "THD_IC_ERR_F_IC_INFRA_SPU_036",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4167",
+      "message": "THD_IC_ERR_F_IC_DOMAIN_PROPERTY_002",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4168",
+      "message": "BIZ_CHECK_BRAND_PERMISSION_TIER_TWO",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4169",
+      "message": "CHK_IMAGE_MAX_ITEMS",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "500",
+      "message": "Create product failed",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "SellerNotActive",
+      "message": "Seller not active,please check seller status",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "5",
+      "message": "Invalid Request Format",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4221",
+      "message": "BIZ_CHECK_MTEE_RISK_RULE_TRIGGER_MTEE_RISK_RULE_TRIGGER_ERROR",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "4139",
+      "message": "BIZ_CHECK_MAIN_IMAGE_REQUIRE:Main image is require",
+      "endpoints": [
+        "/product/create"
+      ]
+    },
+    {
+      "code": "209",
+      "message": "Invalid variation",
+      "endpoints": [
+        "/product/create",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "E0001",
+      "message": "Parameter ItemId is mandatory",
+      "endpoints": [
+        "/product/deactivate"
+      ]
+    },
+    {
+      "code": "E0002",
+      "message": "Product not exists",
+      "endpoints": [
+        "/product/deactivate"
+      ]
+    },
+    {
+      "code": "E0003",
+      "message": "Seller Sku not exists",
+      "endpoints": [
+        "/product/deactivate"
+      ]
+    },
+    {
+      "code": "E0004",
+      "message": "Product Status not online",
+      "endpoints": [
+        "/product/deactivate"
+      ]
+    },
+    {
+      "code": "E0006",
+      "message": "Unexpected internal error",
+      "endpoints": [
+        "/product/deactivate"
+      ]
+    },
+    {
+      "code": "E0002",
+      "message": "Product:item id not exist",
+      "endpoints": [
+        "/product/deactivate"
+      ]
+    },
+    {
+      "code": "4193",
+      "message": "The SellerSku parameter is no longer supported. Please update your parameter to use SkuId and try again",
+      "endpoints": [
+        "/product/deactivate"
+      ]
+    },
+    {
+      "code": "200",
+      "message": "E200: Empty SellerSku",
+      "endpoints": [
+        "/product/item/get"
+      ]
+    },
+    {
+      "code": "207",
+      "message": "E207: SKU not exist",
+      "endpoints": [
+        "/product/item/get"
+      ]
+    },
+    {
+      "code": "208",
+      "message": "E208: Item not exist",
+      "endpoints": [
+        "/product/item/get"
+      ]
+    },
+    {
+      "code": "207",
+      "message": "SKU not exist",
+      "endpoints": [
+        "/product/item/get"
+      ]
+    },
+    {
+      "code": "EDIT_ITEM_NOT_BELONG_SELLER",
+      "message": "You are not authorized to edit the item.",
+      "endpoints": [
+        "/product/item/get"
+      ]
+    },
+    {
+      "code": "6",
+      "message": "Unexpected internal error",
+      "endpoints": [
+        "/product/item/get"
+      ]
+    },
+    {
+      "code": "204",
+      "message": "E204: Too many SKU in one request",
+      "endpoints": [
+        "/product/price_quantity/update"
+      ]
+    },
+    {
+      "code": "501",
+      "message": "E501: Update product failed",
+      "endpoints": [
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "501",
+      "message": "Update product failed",
+      "endpoints": [
+        "/product/price_quantity/update",
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4225",
+      "message": "Your product participated in semi-hosted program, please go to GSP to edit the product price/stock/package details information.",
+      "endpoints": [
+        "/product/price_quantity/update"
+      ]
+    },
+    {
+      "code": "513",
+      "message": "Internal call exception",
+      "endpoints": [
+        "/product/price_quantity/update"
+      ]
+    },
+    {
+      "code": "4171",
+      "message": "The updated SKU quantity exceeds the maximum number 50, please do not update more than 50 SKUs at once",
+      "endpoints": [
+        "/product/price_quantity/update"
+      ]
+    },
+    {
+      "code": "4170",
+      "message": "During the Bday Mega campaign, there are restrictions for stock adjustments in effect between YYYY-MM-DD HH:MM:SS - YYYY-MM-DD HH:MM:SS. Sellers can increase stocks, but may not decrease stocks.",
+      "endpoints": [
+        "/product/price_quantity/update"
+      ]
+    },
+    {
+      "code": "HOT_KEY_BLOCK_EXCEPTION",
+      "message": "hot key protect",
+      "endpoints": [
+        "/product/seller/item/limit"
+      ]
+    },
+    {
+      "code": "SELLER_SERVICE_FAIL",
+      "message": "inner service fail",
+      "endpoints": [
+        "/product/seller/item/limit"
+      ]
+    },
+    {
+      "code": "ONLY_CB_SELLER_SUPPORTED",
+      "message": "For now, only cb seller supported",
+      "endpoints": [
+        "/product/seller/item/limit"
+      ]
+    },
+    {
+      "code": "THIRD_SERVICE_ERROR",
+      "message": "inner service fail",
+      "endpoints": [
+        "/product/seller/item/limit"
+      ]
+    },
+    {
+      "code": "SYS_ERROR",
+      "message": "inner service fail",
+      "endpoints": [
+        "/product/seller/item/limit"
+      ]
+    },
+    {
+      "code": "4134",
+      "message": "CHK_CATEGORY_ID_NOT_LEAF_CATEGORY",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "10002",
+      "message": "Incorrect/missing/unavailable product attributes",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "10006",
+      "message": "the control price is not pass",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "10002",
+      "message": "System error update fail",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4137",
+      "message": "The item id entered in the request does not exist on the current country and store, please call the GetProducts/GetProductItem API to query for the correct item id.",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4218",
+      "message": "Update product failed",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4216",
+      "message": "skuId is a mandatory field and must be filled in.",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4155",
+      "message": "Update product failed",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4152",
+      "message": "THD_INVENTORY_ERR_INV_PARAM_ILLEGAL:illegal parameter:quantity",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "4115",
+      "message": "Attribute value that you input is not included in the dropdown list given. Please select from dropdown to avoid error",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "1001",
+      "message": "The parameters are not in JSON format",
+      "endpoints": [
+        "/product/update"
+      ]
+    },
+    {
+      "code": "70",
+      "message": "E070: You have corrupt data in your sku seller list.",
+      "endpoints": [
+        "/products/get"
+      ]
+    },
+    {
+      "code": "506",
+      "message": "E506: Get product failed",
+      "endpoints": [
+        "/products/get"
+      ]
+    },
+    {
+      "code": "19",
+      "message": "Invalid Limit",
+      "endpoints": [
+        "/products/get"
+      ]
+    },
+    {
+      "code": "IllegalAccessToken",
+      "message": "The specified access token is invalid or expired",
+      "endpoints": [
+        "/seller/get"
+      ]
+    },
+    {
+      "code": "ApiCallLimit",
+      "message": "API-level global rate limit",
+      "endpoints": [
+        "FAQ"
+      ]
+    },
+    {
+      "code": "AppApiCallLimit",
+      "message": "App-level rate limit (longer ban time)",
+      "endpoints": [
+        "FAQ"
+      ]
+    },
+    {
+      "code": "E1002",
+      "message": "Backend rate limit; can be treated as a temporary error",
+      "endpoints": [
+        "FAQ"
+      ]
+    },
+    {
+      "code": "SellerCallLimit",
+      "message": "Triggered only by test accounts; test account QPS is about 4, shared resources",
+      "endpoints": [
+        "FAQ"
+      ]
+    },
+    {
+      "code": "InsufficientPermission",
+      "message": "IM / Chat APIs return InsufficientPermission",
+      "endpoints": [
+        "FAQ"
+      ]
+    },
+    {
+      "code": "SELLER_NOT_PERMITTED",
+      "message": "Product / inventory APIs return SELLER_NOT_PERMITTED (E501 / E0501)",
+      "endpoints": [
+        "FAQ"
+      ]
+    },
+    {
+      "code": "E501",
+      "message": "SELLER_NOT_PERMITTED",
+      "endpoints": [
+        "FAQ"
+      ]
+    },
+    {
+      "code": "E0501",
+      "message": "SELLER_NOT_PERMITTED",
+      "endpoints": [
+        "FAQ"
+      ]
+    },
+    {
+      "code": "ServiceTimeout",
+      "message": "APIs occasionally return 500 / 501 / ServiceTimeout",
+      "endpoints": [
+        "FAQ"
+      ]
+    },
+    {
+      "code": "E305",
+      "message": "Parameter Invalid",
+      "endpoints": [
+        "FAQ"
+      ]
+    }
+  ]
+}

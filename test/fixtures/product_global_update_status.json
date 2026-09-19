@@ -1,0 +1,28 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/product/global/update/status",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2024-03-29 10:46:19)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "error_msg": "Invalid Limit",
+    "code": "0",
+    "data": {
+      "update_ic_product_result": "false",
+      "update_gsp_product_result": "true",
+      "update_ic_product_fail_result_list": [
+        {
+          "market": "LAZADA_MY",
+          "product_id": "3042450256",
+          "update_result": "false",
+          "update_msg": "Product is not found in repository,scenario:UpShelf,productId:3042450256,serverIP:33.65.56.178  \t"
+        }
+      ]
+    },
+    "success": "true",
+    "error_code": "E0019",
+    "request_id": "0ba2887315178178017221014"
+  }
+}

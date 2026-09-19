@@ -1,0 +1,129 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/product/item/get",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-07-28 17:13:05)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "code": "0",
+    "data": {
+      "created_time": "1611554725000",
+      "updated_time": "1611554725000",
+      "images": "[     \"https://my-live.slatic.net/p/540bc796d1eadf316018038d8840f20a.jpg\",     \"https://my-live.slatic.net/p/8913fc357e139ef78ad2f071e9586334.jpg\" ]",
+      "skus": [
+        {
+          "Status": "active",
+          "quantity": 0,
+          "ImageSequence": {
+            "score": "43.99%",
+            "needSuggest": true,
+            "isDistinct": true,
+            "url": [
+              "https://my-live-01.slatic.net/p/eb51cbc92ebc4900910abb58d6f4634e.jpg",
+              "",
+              ""
+            ]
+          },
+          "product_weight": "0.03",
+          "Images": [
+            "http://sg-live-01.slatic.net/p/BUYI1-catalog.jpg",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "SellerSku": "39817:01:01",
+          "ShopSku": "BU565ELAX8AGSGAMZ-1104491",
+          "Url": "https://alice.lazada.sg/asd-1083832.html",
+          "coming_soon": "1731254400000",
+          "package_width": "10.00",
+          "special_to_time": "2020-02-0300:00",
+          "special_from_time": "2015-07-3100:00",
+          "package_height": "4.00",
+          "special_price": 9,
+          "price": 32,
+          "package_length": "10.00",
+          "package_weight": "0.04",
+          "Available": 0,
+          "SkuId": 314525867,
+          "special_to_date": "2020-02-03"
+        }
+      ],
+      "imageSequence": {
+        "score": "43.99%",
+        "needSuggest": true,
+        "isDistinct": true,
+        "url": [
+          "https://my-live-01.slatic.net/p/eb51cbc92ebc4900910abb58d6f4634e.jpg",
+          "",
+          ""
+        ]
+      },
+      "item_id": "234222211",
+      "hiddenStatus": "Android & IOS",
+      "bizSupplement": {
+        "globalPlusProductStatus": 1
+      },
+      "suspendedSkus": [],
+      "subStatus": "Lock,Reject,Live_Reject,Admin",
+      "variation": {
+        "variation3": {
+          "has_image": "false",
+          "name": "Volume",
+          "options": [],
+          "label": "color",
+          "customize": "false"
+        },
+        "variation4": {
+          "has_image": "false",
+          "name": "Size",
+          "options": [],
+          "label": "color",
+          "customize": "false"
+        },
+        "variation1": {
+          "has_image": "red",
+          "name": "color_family",
+          "options": [],
+          "label": "color",
+          "customize": "true"
+        },
+        "variation2": {
+          "has_image": "false",
+          "name": "SizeX",
+          "options": [],
+          "label": "color",
+          "customize": "true"
+        }
+      },
+      "trialProduct": "true,false",
+      "rejectReason": [
+        {
+          "suggestion": "",
+          "violationDetail": "Wrong Description,Price Not Reasonable,Wrong Image, No White Background:Wrong image resolution"
+        }
+      ],
+      "primary_category": "10000211",
+      "marketImages": "[     \"https://my-live.slatic.net/p/540bc796d1eadf316018038d8840f20a.jpg\",     \"https://my-live.slatic.net/p/8913fc357e139ef78ad2f071e9586334.jpg\" ]",
+      "attributes": {
+        "short_description": "<ul><li>asdasd</li></ul>",
+        "name": "asd",
+        "description": "<p>asd</p>\n",
+        "name_engravement": "No",
+        "warranty_type": "International Manufacturer",
+        "gift_wrapping": "No",
+        "preorder_days": 25,
+        "brand": "Asante",
+        "preorder": "Yes"
+      },
+      "hiddenReason": "The product cannot be displayed in the IOS system",
+      "status": "Active,InActive,Pending QC,Suspended,Deleted"
+    },
+    "request_id": "0ba2887315178178017221014"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/product/update",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-07-29 12:51:21)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "code": "0",
+    "data": {
+      "item_status": "Active",
+      "variation": {
+        "Variation1": {
+          "has_image": "false",
+          "name": "color_family",
+          "options": [],
+          "customize": "true"
+        },
+        "Variation2": {
+          "has_image": "false",
+          "name": "color_family",
+          "options": [],
+          "customize": "true"
+        },
+        "Variation3": {
+          "has_image": "false",
+          "name": "color_family",
+          "options": [],
+          "customize": "false"
+        },
+        "Variation4": {
+          "has_image": "false",
+          "name": "color_family",
+          "options": [],
+          "customize": "false"
+        }
+      }
+    },
+    "request_id": "0ba2887315178178017221014"
+  }
+}

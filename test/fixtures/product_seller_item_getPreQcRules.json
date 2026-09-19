@@ -1,0 +1,18 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/product/seller/item/getPreQcRules",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-09-10 15:10:38)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "code": "0",
+    "values": {
+      "item_limit": "1000000",
+      "item_count": "191",
+      "restricted_cate_ids": []
+    },
+    "request_id": "0ba2887315178178017221014"
+  }
+}

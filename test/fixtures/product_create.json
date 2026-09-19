@@ -1,0 +1,24 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/product/create",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-07-14 15:09:51)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "code": "0",
+    "data": {
+      "item_id": "2374791958",
+      "sku_list": [
+        {
+          "shop_sku": "2374791958_SGAMZ-13896560193",
+          "seller_sku": "test2022 03",
+          "sku_id": "13896560193"
+        }
+      ],
+      "item_status": "Active"
+    },
+    "request_id": "0ba2887315178178017221014"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/orders/get",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-07-25 14:53:01)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "code": "0",
+    "data": {
+      "count": "10",
+      "countTotal": "500",
+      "orders": [
+        {
+          "voucher_platform": "0.00",
+          "voucher": "0.00",
+          "warehouse_code": "dropshipping",
+          "order_number": "491253082180001",
+          "voucher_seller": "0.00",
+          "created_at": "2018-02-09T22:44:30+08:00",
+          "voucher_code": "1234",
+          "gift_option": "false",
+          "is_cancel_pending": "true",
+          "shipping_fee_discount_platform": "0.00",
+          "customer_last_name": "last_name",
+          "promised_shipping_times": "shipping_time",
+          "updated_at": "2018-02-09T22:44:30+08:00",
+          "price": "106.00",
+          "national_registration_number": "1",
+          "shipping_fee_original": "0.00",
+          "payment_method": "COD",
+          "address_updated_at": "null",
+          "recipient_info": {
+            "identify_no": "012345679",
+            "detail_address": "318 tanglin road, phoenix park, #01-59",
+            "passport_no": "012345678"
+          },
+          "buyer_note": "red color",
+          "customer_first_name": "Ha Hung",
+          "shipping_fee_discount_seller": "0.00",
+          "shipping_fee": "0.54",
+          "branch_number": "2222",
+          "tax_code": "562562",
+          "items_count": "2",
+          "delivery_info": "delivery",
+          "statuses": [],
+          "address_billing": {
+            "country": "Singapore",
+            "address3": "address3",
+            "address2": "address2",
+            "city": "Singapore-Singapore-500001",
+            "address1": "1 CHANGI VILLAGE ROAD, 11",
+            "phone2": "61****7",
+            "last_name": "last_name",
+            "addressDsitrict": "addressDsitrict",
+            "phone": "61****7",
+            "post_code": "500001",
+            "address5": "address5",
+            "address4": "address4",
+            "first_name": "Ha Hung"
+          },
+          "extra_attributes": "null",
+          "order_id": "491253082180001",
+          "need_cancel_confirm": "true",
+          "remarks": "remarks",
+          "gift_message": "1",
+          "address_shipping": {
+            "country": "Singapore",
+            "address3": "address3",
+            "address2": "address2",
+            "city": "Singapore-Singapore-500001",
+            "address1": "1 CHANGI VILLAGE ROAD, 11",
+            "phone2": "4***456",
+            "last_name": "last_name",
+            "addressDsitrict": "addressDsitrict",
+            "phone": "6****67",
+            "post_code": "500001",
+            "address5": "address5",
+            "address4": "address4",
+            "first_name": "Ha Hung"
+          }
+        }
+      ]
+    },
+    "request_id": "0ba2887315178178017221014"
+  }
+}

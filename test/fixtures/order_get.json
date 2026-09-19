@@ -1,0 +1,79 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/order/get",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-07-25 14:52:57)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "code": "0",
+    "data": {
+      "voucher": "0.00",
+      "warehouse_code": "dropshipping",
+      "order_number": "300034416",
+      "created_at": "2014-10-15 18:36:05 +0800",
+      "voucher_code": "3432",
+      "gift_option": "0",
+      "is_cancel_pending": "true",
+      "shipping_fee_discount_platform": "0.00",
+      "customer_last_name": "last_name",
+      "updated_at": "2014-10-15 18:36:05 +0800",
+      "promised_shipping_times": "2017-03-24 16:09:22",
+      "price": "99.00",
+      "national_registration_number": "1123",
+      "shipping_fee_original": "0.00",
+      "payment_method": "COD",
+      "recipient_info": {
+        "identify_no": "012345679",
+        "detail_address": "318 tanglin road, phoenix park, #01-59",
+        "passport_no": "012345678"
+      },
+      "buyer_note": "red color",
+      "customer_first_name": "First Name",
+      "shipping_fee_discount_seller": "0.00",
+      "shipping_fee": "0.00",
+      "branch_number": "2222",
+      "tax_code": "1234",
+      "items_count": "1",
+      "delivery_info": "1",
+      "statuses": [],
+      "address_billing": {
+        "country": "Singapore",
+        "address3": "address3",
+        "address2": "address2",
+        "city": "Singapore-Central",
+        "address1": "22 leonie hill road, #13-01",
+        "phone2": "24***22",
+        "last_name": "Last Name",
+        "phone": "81***8",
+        "post_code": "239195",
+        "address5": "address5",
+        "address4": "address4",
+        "addressDistrict": "addressDistrict",
+        "first_name": "First Name"
+      },
+      "extra_attributes": "{\"TaxInvoiceRequested\":\"true\"}",
+      "order_id": "16090",
+      "need_cancel_confirm": "true",
+      "gift_message": "Gift",
+      "remarks": "remarks",
+      "address_shipping": {
+        "country": "Singapore",
+        "address3": "address3",
+        "address2": "address2",
+        "city": "Singapore-Central",
+        "address1": "318 tanglin road, phoenix park, #01-59",
+        "phone2": "1******2",
+        "last_name": "Last Name",
+        "phone": "94236248",
+        "post_code": "247979",
+        "address5": "1******2",
+        "address4": "address4",
+        "addressDistrict": "addressDistrict",
+        "first_name": "First Name"
+      }
+    },
+    "request_id": "0ba2887315178178017221014"
+  }
+}

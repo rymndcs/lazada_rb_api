@@ -1,0 +1,29 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/auth/token/refresh",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-07-28 16:53:43)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "access_token": "50000601c30atpedfgu3LVvik87Ixlsvle3mSoB7701ceb156fPunYZ43GBg",
+    "country": "sg",
+    "refresh_token": "500016000300bwa2WteaQyfwBMnPxurcA0mXGhQdTt18356663CfcDTYpWoi",
+    "account_id": "7063844",
+    "code": "0",
+    "country_user_info_list": [
+      {
+        "country": "sg",
+        "user_id": "10101",
+        "seller_id": "1001",
+        "short_code": "SG001"
+      }
+    ],
+    "account_platform": "seller_center",
+    "refresh_expires_in": "60",
+    "expires_in": "10",
+    "request_id": "0ba2887315178178017221014",
+    "account": "xxx@126.com"
+  }
+}

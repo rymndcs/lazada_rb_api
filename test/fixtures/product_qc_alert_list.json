@@ -1,0 +1,24 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/product/qc/alert/list",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-12-13 10:09:17)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "code": "0",
+    "data": [
+      {
+        "productId": "0",
+        "suggestionCategories": [
+          0,
+          1
+        ],
+        "categoryId": "0",
+        "deactivationTime": "0"
+      }
+    ],
+    "request_id": "0ba2887315178178017221014"
+  }
+}

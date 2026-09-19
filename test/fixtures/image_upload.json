@@ -1,0 +1,19 @@
+{
+  "_source": {
+    "url": "https://open.lazada.com/apps/doc/api?path=/image/upload",
+    "pulled": "2026-09-20",
+    "origin": "official documentation response sample (API reference, last updated 2022-07-29 12:35:51)"
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "code": "0",
+    "data": {
+      "image": {
+        "hash_code": "61bdf049525b7d4c2cf79257ec7c2c56",
+        "url": "http://my-live-01.slatic.net/p/orange_yellow.jpg"
+      }
+    },
+    "request_id": "0ba2887315178178017221014"
+  }
+}
