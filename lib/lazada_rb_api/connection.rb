@@ -59,17 +59,22 @@ module LazadaRbApi
     def perform(request, idempotent)
       time = now
       query, body = split(request)
-      system = system_params(time, request[:access_token])
-      signature = Signer.sign(@app_secret, Signer.base_string(request[:path], system.merge(query).merge(body)))
-      url = "#{host_url(request[:host])}#{request[:path]}?" \
-            "#{URI.encode_www_form(system.merge(query).merge("sign" => signature))}"
       payload, content_type = encode_body(request, body)
       headers = { "User-Agent" => USER_AGENT, "Accept" => "application/json" }
       headers["Content-Type"] = content_type if content_type
       started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      result = send_request(request[:http_method], url, headers, payload, idempotent)
+      result = send_request(request[:http_method], signed_url(request, time, query, body), headers, payload,
+                            idempotent)
       log(request, result, started)
       Envelope.build(result, endpoint: request[:path], idempotent:, now: time)
+    end
+
+    # System parameters, the query and `sign` go in the URL; the signature also covers the form body.
+    def signed_url(request, time, query, body)
+      system = system_params(time, request[:access_token])
+      signature = Signer.sign(@app_secret, Signer.base_string(request[:path], system.merge(query).merge(body)))
+      "#{host_url(request[:host])}#{request[:path]}?" \
+        "#{URI.encode_www_form(system.merge(query).merge("sign" => signature))}"
     end
 
     # On GET there is no body: business parameters join the query.

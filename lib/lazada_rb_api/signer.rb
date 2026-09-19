@@ -14,7 +14,7 @@ module LazadaRbApi
 
     # params: { String => String }. => the UTF-8 (binary) base string.
     def base_string(path, params)
-      pairs = params.reject { |_, value| value.nil? || value.to_s.empty? }.map { |key, value| [key.to_s.b, value.to_s.b] }
+      pairs = params.filter_map { |key, value| [key.to_s.b, value.to_s.b] unless value.nil? || value.to_s.empty? }
       pairs.sort_by(&:first).each_with_object(path.to_s.b.dup) { |(key, value), out| out << key << value }
     end
 

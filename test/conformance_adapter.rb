@@ -104,7 +104,8 @@ module ConformanceAdapter
       ["ServerError", "501", "Update product failed", true],
       ["BusinessError", "501", "Update product failed", false, nil, detail],
       ["BusinessError", "4148", "BIZ_CHECK_ITEM_HAS_REACH_LIMIT", false]
-    ].map do |class_name, code, message, retryable, retry_after, error_detail|
+    ].map do |row|
+      class_name, code, message, retryable, retry_after, error_detail = row
       { class_name:, response: error(code, message, detail: error_detail), code:, request_id: REQUEST_ID,
         retryable:, retry_after: }
     end
@@ -141,7 +142,8 @@ module ConformanceAdapter
       "products.create" => [->(_, s) { s.products.create(product_payload) }, "product_create"],
       "products.get" => [->(_, s) { s.products.get(ITEM_ID) }, "product_item_get"],
       "products.update" => [lambda { |_, s|
-        s.products.update(ITEM_ID, { "Attributes" => { "name" => "H4 bulb" }, "Skus" => { "Sku" => [{ "SkuId" => SKU_ID }] } })
+        s.products.update(ITEM_ID, { "Attributes" => { "name" => "H4 bulb" },
+                                     "Skus" => { "Sku" => [{ "SkuId" => SKU_ID }] } })
       }, "product_update"],
       "products.list" => [->(_, s) { s.products.list(filter: "live") }, "products_get"],
       "products.find_by_seller_sku" => [->(_, s) { s.products.find_by_seller_sku("39817:01:01") }, "products_get"],
@@ -197,7 +199,8 @@ module ConformanceAdapter
       { name: "payload under values", call: ->(_, s) { s.limits(option: 1, option_set: [1, 2]) },
         response: Fixtures.response("product_seller_item_getPreQcRules"),
         expect: { data: rules["values"], request_id: rules["request_id"], warnings: [], item_errors: [] } },
-      { name: "brands envelope (success / error_code / error_msg)", call: ->(_, s) { s.brands.list.first_page.response },
+      { name: "brands envelope (success / error_code / error_msg)",
+        call: ->(_, s) { s.brands.list.first_page.response },
         response: Fixtures.response("category_brands_query"),
         expect: { data: brands["data"], request_id: brands["request_id"], warnings: [], item_errors: [] } },
       { name: "seller limit envelope (success / errorCodes / errorMsgs)", call: ->(_, s) { s.item_limit },
@@ -323,7 +326,7 @@ module ConformanceAdapter
   # and form parameter but sign (and not the file part), sorted by name, after the API path (the URL path without
   # the /rest prefix).
   def expected_signature(request)
-    params = request.query_pairs.reject { |k, _| k == "sign" } + form_pairs(request)
+    params = request.query_pairs.reject { |pair| pair.first == "sign" } + form_pairs(request)
     raise "app_key missing from the query" unless request.query["app_key"] == APP_KEY
 
     base = request.path.delete_prefix("/rest") + params.sort_by(&:first).map { |k, v| "#{k}#{v}" }.join
@@ -363,17 +366,22 @@ module ConformanceAdapter
 
   EXPIRY_PUSH = '{"seller_id":"null","message_type":8,"data":{"app_key":"123456","auth_expiry_time":1627542238,' \
                 '"seller_id":"1000165972"},"timestamp":1627416758,"site":"lazada_ph"}'
+  GUIDE_PUSH = '{"seller_id":"1234567", "message_type":0, "data":{...}..}'
   QC_PUSH = '{"seller_id":"500176629136","message_type":1,"data":{"date":1627451616614,"itemId":2202832065,' \
             '"reason":"Prohibited and Controlled Products Policy","seller_id":500176629136,"status":"Lock"},' \
             '"timestamp":1627451616,"site":"lazada_ph"}'
 
-  # SELF-GENERATED vectors: the push guide's own example (signature f3d2ca94…6104ab) cannot be reproduced, because
-  # its body is elided as {...}. These use the guide's example app key and secret over the documented token-expiry
-  # and QC bodies; the digests were derived with Python's hmac module, independently of the gem.
+  # The first vector is the push guide's own example (doc 120168: app key 123456, secret 3412gyo124goi3124,
+  # f3d2ca94…6104ab). Its body is printed with the data elided as {...}, and the digest is over that literal text, so
+  # it reproduces byte for byte; it is not JSON, so it is verified but never parsed. The other two are SELF-GENERATED
+  # over the documented token-expiry and QC bodies with the same key and secret; their digests were derived with
+  # Python's hmac module, independently of the gem.
   def webhook_vectors
     [
       { name: "token expiration alert (msg_type 8), self-generated", url: nil, raw_body: EXPIRY_PUSH,
         signature: "db0ff45c239239076b916c2d1e190ea65ea591bb7427ba473ba766bb1f5d06a3" },
+      { name: "doc 120168 official example (literal elided body)", url: nil, raw_body: GUIDE_PUSH,
+        signature: "f3d2ca947f16a50b577c036adecd18bec126ea19cadedd59816e255d3b6104ab" },
       { name: "product QC status (msg_type 1), self-generated", url: nil, raw_body: QC_PUSH,
         signature: "741b801927ca2ef96c5e86870b113f8acee862193d8da6ec8a4471bef999ab53" }
     ]
@@ -385,7 +393,8 @@ module ConformanceAdapter
         expect: { type: :authorization_expiring, code: "8", shop_id: "1000165972",
                   occurred_at: Time.at(1_627_416_758).utc } },
       { raw_body: QC_PUSH,
-        expect: { type: :product_status, code: "1", shop_id: "500176629136", occurred_at: Time.at(1_627_451_616).utc } },
+        expect: { type: :product_status, code: "1", shop_id: "500176629136",
+                  occurred_at: Time.at(1_627_451_616).utc } },
       { raw_body: '{"seller_id":"1234567","message_type":0,"data":{"order_status":"unpaid",' \
                   '"trade_order_id":"260422900198363"},"timestamp":1603766859530,"site":"lazada_vn"}',
         expect: { type: :other, code: "0", shop_id: "1234567", occurred_at: Time.at(1_603_766_859.53r).utc } }

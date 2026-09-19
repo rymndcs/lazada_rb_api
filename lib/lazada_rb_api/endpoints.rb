@@ -14,10 +14,12 @@ module LazadaRbApi
           token: "https://auth.lazada.com/rest" }.freeze,
     my: { api: "https://api.lazada.com.my/rest", auth: "https://auth.lazada.com",
           token: "https://auth.lazada.com/rest" }.freeze,
-    sg: { api: "https://api.lazada.sg/rest", auth: "https://auth.lazada.com", token: "https://auth.lazada.com/rest" }.freeze,
+    sg: { api: "https://api.lazada.sg/rest", auth: "https://auth.lazada.com",
+          token: "https://auth.lazada.com/rest" }.freeze,
     th: { api: "https://api.lazada.co.th/rest", auth: "https://auth.lazada.com",
           token: "https://auth.lazada.com/rest" }.freeze,
-    vn: { api: "https://api.lazada.vn/rest", auth: "https://auth.lazada.com", token: "https://auth.lazada.com/rest" }.freeze,
+    vn: { api: "https://api.lazada.vn/rest", auth: "https://auth.lazada.com",
+          token: "https://auth.lazada.com/rest" }.freeze,
     id: { api: "https://api.lazada.co.id/rest", auth: "https://auth.lazada.com",
           token: "https://auth.lazada.com/rest" }.freeze
   }.freeze

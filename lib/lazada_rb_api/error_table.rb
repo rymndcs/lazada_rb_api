@@ -52,15 +52,16 @@ module LazadaRbApi
     # server failure: "check the detail field in the API response to understand the SKU where the error occurred".
     def classify(code, message, detail = [])
       code = code.to_s
-      message = message.to_s
-      rule = MESSAGE_RULES.find do |rule_code, pattern, _|
-        (rule_code.nil? || rule_code == code) && message.match?(pattern)
-      end
-      return LazadaRbApi.const_get(rule.last) if rule
+      rule = message_rule(code, message.to_s)
+      return LazadaRbApi.const_get(rule) if rule
       return BusinessError if OVERVIEW_CODES.include?(code) && Array(detail).any?
 
       name = BY_CODE[code]
       name ? LazadaRbApi.const_get(name) : ApiError
+    end
+
+    def message_rule(code, message)
+      MESSAGE_RULES.find { |rule_code, pattern, _| [nil, code].include?(rule_code) && message.match?(pattern) }&.last
     end
 
     # An HTTP-level failure with no Lazada error body.

@@ -67,8 +67,8 @@ module LazadaRbApi
     # https://open.lazada.com/apps/doc/api?path=/product/deactivate
     def unlist(product_ids)
       id = ids!(product_ids, "product_ids", UNLIST_BATCH_MAX).first
-      session.post(Endpoints::PRODUCT_DEACTIVATE, { apiRequestBody: Resources.product_request({ "ItemId" => id.to_s }) },
-                   idempotent: true)
+      body = { apiRequestBody: Resources.product_request({ "ItemId" => id.to_s }) }
+      session.post(Endpoints::PRODUCT_DEACTIVATE, body, idempotent: true)
     end
 
     # POST /product/global/update/status with type=single and status=upShelf: one product per call.

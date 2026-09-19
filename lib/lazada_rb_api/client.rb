@@ -25,7 +25,8 @@ module LazadaRbApi
       @app_key = app_key!(app_key)
       @endpoint = endpoint
       named = hosts!(endpoint)
-      hosts = { api: url!(base_url || named[:api], "base_url"), auth: url!(auth_base_url || named[:auth], "auth_base_url"),
+      hosts = { api: url!(base_url || named[:api], "base_url"),
+                auth: url!(auth_base_url || named[:auth], "auth_base_url"),
                 token: url!(token_base_url || named[:token], "token_base_url") }
       @connection = Connection.new(app_key: @app_key, app_secret: secret!(app_secret), hosts:, endpoint:,
                                    transport: callable!(transport, "transport"), clock: callable!(clock, "clock"),

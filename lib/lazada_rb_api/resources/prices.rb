@@ -10,8 +10,8 @@ module LazadaRbApi
     # Sets absolute prices, so it is idempotent.
     # https://open.lazada.com/apps/doc/api?path=/product/price_quantity/update
     def update(product_id, skus)
-      session.post(Endpoints::PRICE_QUANTITY, Resources.price_quantity(id!(product_id, "product_id"), batch!(skus, "skus", SKUS_MAX)),
-                   idempotent: true)
+      body = Resources.price_quantity(id!(product_id, "product_id"), batch!(skus, "skus", SKUS_MAX))
+      session.post(Endpoints::PRICE_QUANTITY, body, idempotent: true)
     end
   end
 end
