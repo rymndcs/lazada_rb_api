@@ -65,6 +65,9 @@ LazadaRbApi::Client.new(app_key: key, app_secret: secret, endpoint: :ph,
                         token_base_url: "https://auth.lazada.com/rest")     # token API host
 ```
 
+`token_base_url:` is a declared constructor keyword (contract v2, `EXTENSIONS["Client#token_base_url"]`);
+`client.token_base_url` reads the token host in use.
+
 Lazada has no sandbox host: testing uses a Testing-status app and test seller accounts against the production hosts.
 
 ## Authorization
@@ -272,11 +275,12 @@ real authorized store:
 LAZADA_APP_KEY=... LAZADA_APP_SECRET=... LAZADA_ACCESS_TOKEN=... LAZADA_ENDPOINT=ph bundle exec rake test:live
 ```
 
-Add `LAZADA_RECORD=1` to replace the documentation fixtures with redacted recordings of successful responses (error
-responses are never recorded).
+Add `LAZADA_RECORD=1` to replace the documentation fixtures with redacted recordings of successful responses. Error
+responses are never recorded, and neither is any order response (orders stay on documentation samples); customer
+personal data (email, phone, name, nickname, address, recipient and buyer objects) is redacted wherever it appears.
 
 ## Contract version
 
-`LazadaRbApi::CONTRACT_VERSION` is `"1"`. The shared interface lives in [CONTRACT.md](CONTRACT.md), which is identical
+`LazadaRbApi::CONTRACT_VERSION` is `"2"`. The shared interface lives in [CONTRACT.md](CONTRACT.md), which is identical
 in all three sibling gems; `test/conformance/` enforces it and `rake conformance:verify` proves the shared files match
 `test/conformance/MANIFEST`. Change the contract only in all three gems at once, as CONTRACT.md describes.

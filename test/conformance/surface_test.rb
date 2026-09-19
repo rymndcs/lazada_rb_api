@@ -26,6 +26,19 @@ module Conformance
       extensions.map(&:first).uniq - contract_class_names
     end
 
+    # The contract's parameters, in order, plus only optional keywords declared in EXTENSIONS as "Class#keyword".
+    # A declared keyword may sit anywhere among them (token_base_url: follows auth_base_url: by convention).
+    def assert_initialize(class_name, params)
+      actual = const(class_name).instance_method(:initialize).parameters
+      extras = actual - params
+
+      assert_equal params, actual - extras, "#{class_name}.new"
+      extras.each do |kind, name|
+        assert_equal :key, kind, "#{class_name}.new #{name}: an extra keyword must be optional"
+        assert_includes extension_members(class_name), name, "#{class_name}.new #{name}: undeclared keyword"
+      end
+    end
+
     def test_contract_version
       assert_equal CONTRACT[:version], gem_module::CONTRACT_VERSION
       assert_match(/\A0\.\d+\.\d+\z/, gem_module::VERSION, "versions stay 0.x until the live recording round passes")
@@ -52,7 +65,8 @@ module Conformance
       refute_empty endpoints
       endpoints.each do |name, hosts|
         assert_kind_of Symbol, name
-        assert_equal %i[api auth], hosts.keys.sort
+        assert_equal token_host? ? %i[api auth token] : %i[api auth], hosts.keys.sort,
+                     "#{name}: every entry carries :token exactly when Client#token_base_url is declared"
         hosts.each_value { |url| assert_match(%r{\Ahttps://[^/\s]+\S*\z}, url) }
       end
     end
@@ -75,9 +89,7 @@ module Conformance
         spec[:instance].each do |name, params|
           assert_equal params, klass.instance_method(name).parameters, "#{class_name}##{name} parameters"
         end
-        if spec.key?(:initialize)
-          assert_equal spec[:initialize], klass.instance_method(:initialize).parameters, "#{class_name}.new"
-        end
+        assert_initialize(class_name, spec[:initialize]) if spec.key?(:initialize)
         singleton = spec.fetch(:singleton, {})
 
         assert_equal singleton.keys.sort, klass.singleton_methods(false).sort, "#{class_name} singleton methods"

@@ -9,7 +9,7 @@ module Conformance
   PAGED = [%i[key page_size], %i[key cursor], %i[keyrest params]].freeze
 
   CONTRACT = {
-    version: "1",
+    version: "2",
 
     module_constants: %i[
       VERSION CONTRACT_VERSION EXTENSIONS ENDPOINTS
@@ -28,6 +28,8 @@ module Conformance
 
     # Class => { initialize: params, singleton: { name => params }, instance: { name => params } }.
     # `instance` is the exact list of public methods the class itself defines, besides declared extensions.
+    # `initialize` is the exact parameter list in order, except that a class may also take optional keywords that its
+    # EXTENSIONS declare as "Class#keyword", each with a public reader of the same name (surface_test.rb).
     classes: {
       "Client" => {
         initialize: [%i[keyreq app_key], %i[keyreq app_secret], %i[key endpoint], %i[key base_url],
@@ -121,6 +123,10 @@ module Conformance
     api_error_methods: %i[code message request_id http_status endpoint detail response retry_after retryable?],
 
     webhook_types: %i[authorization_expiring deauthorized product_status other],
+
+    # The shared calls that obtain tokens. They reach the endpoint's :token host when ENDPOINTS carries one (with
+    # the declared Client#token_base_url override), else the API host (hosts_test.rb).
+    token_calls: %w[auth.exchange_code auth.refresh],
 
     # Every shared method that makes a request; the adapter must supply a call for each (requests_test.rb).
     shared_calls: %w[

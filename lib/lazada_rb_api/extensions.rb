@@ -5,6 +5,7 @@ module LazadaRbApi
   # shared contract. "Class#member" => what it calls. The conformance suite fails on any public method or constant
   # that is neither in the contract nor declared here.
   EXTENSIONS = {
+    "Client#token_base_url" => "Client.new keyword and reader: the token API host (/auth/token/create, /refresh)",
     "Products#qc_alerts" => "GET /product/qc/alert/list",
     "Products#activate_skus" => "POST /product/update with each SKU's Status \"active\" (local-seller reactivation)",
     "Orders#items" => "GET /order/items/get",

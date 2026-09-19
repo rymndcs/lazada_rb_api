@@ -86,6 +86,11 @@ module Conformance
       expected.nil? ? assert_nil(actual, message) : assert_equal(expected, actual, message)
     end
 
+    # True when the gem's ENDPOINTS carry a separate :token host, overridable with the declared token_base_url:.
+    def token_host?
+      gem_module::EXTENSIONS.key?("Client#token_base_url")
+    end
+
     # Pager results are lazy: force one page so the call makes its request.
     def force(result)
       result.is_a?(gem_module::Pager) ? result.first_page : result

@@ -6,7 +6,7 @@ module LazadaRbApi
   class Client
     include Redaction
 
-    attr_reader :app_key, :endpoint, :auth
+    attr_reader :app_key, :endpoint, :auth, :token_base_url
 
     # app_key:        the Lazada app key (String or Integer).
     # app_secret:     the Lazada app secret.
@@ -28,6 +28,7 @@ module LazadaRbApi
       hosts = { api: url!(base_url || named[:api], "base_url"),
                 auth: url!(auth_base_url || named[:auth], "auth_base_url"),
                 token: url!(token_base_url || named[:token], "token_base_url") }
+      @token_base_url = hosts[:token]
       @connection = Connection.new(app_key: @app_key, app_secret: secret!(app_secret), hosts:, endpoint:,
                                    transport: callable!(transport, "transport"), clock: callable!(clock, "clock"),
                                    logger:, retry_policy: retry_policy || RetryPolicy.none)

@@ -12,7 +12,7 @@
 require "digest"
 
 module VerifyManifest
-  SUITE_VERSION = "1"
+  SUITE_VERSION = "2"
   ROOT = File.expand_path("../..", __dir__)
   MANIFEST = File.join(ROOT, "test/conformance/MANIFEST")
   SHARED = %w[CONTRACT.md .rubocop.yml Rakefile Gemfile test/support/fake_transport.rb].freeze

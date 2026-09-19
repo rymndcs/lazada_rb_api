@@ -13,12 +13,22 @@ require "logger"
 #   LAZADA_BASE_URL      optional API host override
 #   LAZADA_RECORD=1      writes every successful response (2xx, code "0", success not false), redacted, over
 #                        test/fixtures/<path>.json with "_source" naming the recording, replacing the documentation
-#                        sample. Error responses are never recorded.
+#                        sample. Error responses are never recorded, and neither is any order response
+#                        (/orders/get, /order/get, /order/items/get): orders stay on documentation samples.
+#                        Customer personal data (email, phone, name, nickname, address, and whole recipient or
+#                        buyer objects) is redacted wherever it appears (captain decision 2026-09-20).
 #
 # The live tests only READ. They never refresh a token (the refresh token may be single use) and never write.
 module LiveHelper
   REQUIRED = %w[LAZADA_APP_KEY LAZADA_APP_SECRET LAZADA_ACCESS_TOKEN].freeze
   SECRET_KEYS = /token|secret|\Asign\z|\Acode\z|email|account/i
+  # Order endpoints are never recorded: their responses carry real customers' names, phones and addresses.
+  ORDER_PATHS = %r{\A/orders?/}
+  # Customer personal-data words, matched case-insensitively against each word of a key (snake_case or camelCase,
+  # digits ignored: address1, phone2, customer_first_name, nickName). A matching key loses its whole value.
+  PERSONAL_WORDS = %w[email phone name nickname address].freeze
+  # A Hash or Array under a key naming a recipient or buyer (recipient_info, buyer_address) is redacted whole.
+  PERSON_OBJECTS = /recipient|buyer/i
 
   module_function
 
@@ -69,10 +79,12 @@ module LiveHelper
     private
 
     def record(path, result)
+      api_path = path.delete_prefix("/rest")
+      return if api_path.match?(ORDER_PATHS)
+
       parsed = JSON.parse(result[:body])
       return unless recordable?(result[:status], parsed)
 
-      api_path = path.delete_prefix("/rest")
       fixture = { "_source" => { "url" => "https://open.lazada.com/apps/doc/api?path=#{api_path}",
                                  "pulled" => Date.today.iso8601,
                                  "origin" => "recorded live #{Date.today.iso8601} (#{@label}), redacted" },
@@ -98,7 +110,16 @@ module LiveHelper
     end
 
     def redact_member(key, value)
+      return "[REDACTED]" if personal?(key, value)
+
       key.to_s.match?(SECRET_KEYS) && value.is_a?(String) ? "[REDACTED]" : redact(value)
+    end
+
+    def personal?(key, value)
+      words = key.to_s.gsub(/([a-z])([A-Z])/, '\1_\2').downcase.delete("0-9").split(/[^a-z]+/)
+      return true if words.intersect?(PERSONAL_WORDS)
+
+      (value.is_a?(Hash) || value.is_a?(Array)) && key.to_s.match?(PERSON_OBJECTS)
     end
   end
 

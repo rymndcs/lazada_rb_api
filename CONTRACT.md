@@ -1,7 +1,7 @@
 # The shared interface contract
 
 ```ruby
-CONTRACT_VERSION = "1"
+CONTRACT_VERSION = "2"
 ```
 
 This file is the shared interface of three sibling gems: `shopee_rb_api`, `lazada_rb_api` and `tiktok_shop_rb_api`.
@@ -16,6 +16,10 @@ decisions taken the same day:
 - The gems are libraries. They implement each platform faithfully and configurably and bake in no policy of the
   application that uses them: which host, which sandbox, token re-consent schedules and which limit endpoint to rely
   on all belong to the caller.
+
+Version 2 (captain, 2026-09-19, "Contract v2 in all three") adds two things and changes nothing for Shopee: a gem may
+take extra `Client.new` keywords that its `EXTENSIONS` declare (§2), and an `ENDPOINTS` entry may name a separate
+token host with a `token_base_url:` override (§2 "Hosts").
 
 "Every gem" means all three.
 
@@ -40,7 +44,7 @@ No global configuration and no `configure` block: one process serves many storef
 credential. It is immutable and safe to share across threads.
 
 ```ruby
-client = ShopeeRbApi::Client.new(          # LazadaRbApi::Client / TiktokShopRbApi::Client: same keywords
+client = ShopeeRbApi::Client.new(          # Lazada/TikTok: same keywords, plus declared ones (below)
   app_key:       "2001887",                # Shopee partner_id | Lazada app_key | TikTok app_key (String or Integer)
   app_secret:    ENV.fetch("SHOPEE_PARTNER_KEY"),  # Shopee partner_key | Lazada/TikTok app_secret
   endpoint:      :sg,                      # a Symbol from the gem's ENDPOINTS table; default per gem
@@ -56,7 +60,19 @@ client.endpoint     # => :sg
 client.inspect      # => "#<ShopeeRbApi::Client app_key=\"2001887\" endpoint=:sg app_secret=[REDACTED]>"
 ```
 
-An unknown `endpoint:`, or a `base_url:` / `auth_base_url:` that is not an http(s) URL, raises `ConfigurationError`.
+An unknown `endpoint:`, or a `base_url:` / `auth_base_url:` / `token_base_url:` that is not an http(s) URL, raises
+`ConfigurationError`.
+
+**Declared constructor keywords.** Besides the keywords above, a gem's `Client.new` may take only optional keywords
+that its `EXTENSIONS` declare as `"Client#<keyword>"`, and each has a public reader of the same name. A declared
+keyword may sit anywhere in the list; `token_base_url:` follows `auth_base_url:`. The conformance suite checks the
+contract's keywords in order, and that every other one is optional and declared.
+
+| Gem | Declared keywords | Why |
+|---|---|---|
+| Shopee | none | |
+| Lazada | `token_base_url:` | its token API is on `auth.lazada.com/rest`, not the API host |
+| TikTok | `token_base_url:`, `service_id:` | tokens come from `auth.tiktok-shops.com`; the consent link is keyed by service id (optional; only `authorize_url` needs it, and raises `ConfigurationError` without it) |
 
 **Transport contract.** A transport is any object that responds to
 `call(method:, url:, headers:, body:) -> { status: Integer, headers: Hash, body: String }`. `method` is one of
@@ -71,21 +87,21 @@ other URL can replace it:
 
 - Each gem's `ENDPOINTS` constant is the one named-host table: a frozen Hash of
   `Symbol => { api: "https://...", auth: "https://..." }`, the API host and the consent-page host for that name.
-- `endpoint:` picks a name. `base_url:` replaces the API host and `auth_base_url:` replaces the consent-page host, with
-  any URL (a proxy, a new region, a stale sandbox).
+- A platform whose token calls (`auth.exchange_code`, `auth.refresh`) go to a third host adds `token: "https://..."`
+  to **every** entry and declares `"Client#token_base_url"` in `EXTENSIONS`. Without a `:token` host, token calls go
+  to the API host.
+- `endpoint:` picks a name. `base_url:` replaces the API host, `auth_base_url:` replaces the consent-page host and
+  `token_base_url:` (where declared) replaces the token host, with any URL (a proxy, a new region, a stale sandbox).
 - No host URL may appear anywhere in a gem's `lib/` except that table. The conformance suite configures a custom URL
-  for both hosts and checks that every shared call and the consent URL reach only those hosts; it also selects every
-  named host.
+  for every host and checks that every shared call and the consent URL reach only those hosts, token calls the token
+  host; it also selects every named host.
 - The default endpoint is one named constant, so changing it is a one-line change.
 
 | Gem | `ENDPOINTS` names | Default | Notes |
 |---|---|---|---|
 | Shopee | `:sg` (partner.shopeemobile.com; consent open.shopee.com), `:cn` (openplatform.shopee.cn; open.shopee.cn), `:br` (openplatform.shopee.com.br; open.shopee.com.br), `:sandbox` (openplatform.sandbox.test-stable.shopee.sg; open.sandbox.test-stable.shopee.com), `:sandbox_cn` (openplatform.sandbox.test-stable.shopee.cn; open.sandbox.test-stable.shopee.cn) | `:sg` | the API host follows where the CALLER'S SERVER runs, not the shop's market |
-| Lazada | `:ph`, `:my`, `:sg`, `:th`, `:vn`, `:id` → `api.lazada.<tld>/rest` | `:ph` | the API host follows the shop's country; every entry's consent host is `auth.lazada.com` |
-| TikTok | `:row`, `:us` | `:row` | every entry's API host is `open-api.tiktokglobalshop.com`; the name picks the consent host |
-
-**Platform-specific constructor keyword (declared extension):** TikTok adds `service_id:` (optional; needed only by
-`authorize_url`), because TikTok's consent link is keyed by service id, not app key.
+| Lazada | `:ph`, `:my`, `:sg`, `:th`, `:vn`, `:id` → `api.lazada.<tld>/rest` | `:ph` | the API host follows the shop's country; every entry's consent host is `auth.lazada.com` and its token host `auth.lazada.com/rest` |
+| TikTok | `:row`, `:us` | `:row` | every entry's API host is `open-api.tiktokglobalshop.com` and its token host `auth.tiktok-shops.com`; the name picks the consent host (`services.tiktokshop.com` / `services.us.tiktokshop.com`) |
 
 ## 3. Per-shop credentials: the shop session
 

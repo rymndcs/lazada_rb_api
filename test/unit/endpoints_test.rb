@@ -54,6 +54,7 @@ class EndpointsTest < Minitest::Test
     assert client.auth.authorize_url(redirect_uri: "https://x.test/cb")
                  .start_with?("https://consent.example.test/oauth/authorize?")
     assert_equal :my, client.endpoint
+    assert_equal "https://token.example.test/rest", client.token_base_url
   end
 
   def test_base_url_alone_keeps_the_endpoints_consent_and_token_hosts
