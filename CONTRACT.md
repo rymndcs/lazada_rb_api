@@ -21,6 +21,9 @@ Version 2 (captain, 2026-09-19, "Contract v2 in all three") adds two things and 
 take extra `Client.new` keywords that its `EXTENSIONS` declare (§2), and an `ENDPOINTS` entry may name a separate
 token host with a `token_base_url:` override (§2 "Hosts").
 
+On 2026-09-20 (captain, RAC-275 follow-up) the Lazada and TikTok rows were brought in line with the gems as built:
+text only, no interface change, `CONTRACT_VERSION` stays 2.
+
 "Every gem" means all three.
 
 ## 1. Naming and module layout
@@ -201,7 +204,7 @@ shop.products.find_by_seller_sku(seller_sku)        # => Array<String> product i
 shop.products.unlist(product_ids)                   # => Response   per-item failures in #item_errors
 shop.products.relist(product_ids)                   # => Response   per-item failures in #item_errors
 ShopeeRbApi::Products::UNLIST_BATCH_MAX             # 50 | Lazada 1 | TikTok 20
-ShopeeRbApi::Products::RELIST_BATCH_MAX             # 50 | Lazada: set when its endpoint is confirmed | TikTok: per its docs
+ShopeeRbApi::Products::RELIST_BATCH_MAX             # 50 | Lazada 1 | TikTok 20
 
 shop.stock.get(product_id, **params)                # => Response
 shop.stock.update(product_id, skus)                 # => Response   skus: Array of native SKU hashes
@@ -216,7 +219,7 @@ shop.orders.get(order_id, **params)                 # => Response   (read-only)
 | Method | Shopee | Lazada | TikTok Shop |
 |---|---|---|---|
 | `info` | `GET /api/v2/shop/get_shop_info` | `GET /seller/get` | `GET /authorization/202309/shops`; `data` = the element whose `cipher` matches |
-| `limits` | `GET /api/v2/product/get_item_limit` (`category_id` optional) | `getPreQcRules`; `GetSellerItemLimit` is exposed too (the caller chooses) | `GET /product/202312/prerequisites` |
+| `limits` | `GET /api/v2/product/get_item_limit` (`category_id` optional) | `getPreQcRules`; `GetSellerItemLimit` is the declared extension `shop.item_limit` (cross-border sellers only; the caller chooses) | `GET /product/202312/prerequisites` |
 | `categories.list` | `get_category` | `/category/tree/get` | `GET /product/202309/categories` |
 | `categories.attributes` | `get_attribute_tree` (`category_id_list` = [id]) | `/category/attributes/get` (`primary_category_id`) | `GET /product/202309/categories/{id}/attributes` |
 | `categories.recommend` | `category_recommend` (`item_name`) | `/product/category/suggestion/get` (`product_name`; `image_url` required in params) | `POST /product/202309/categories/recommend` (`product_title`) |
@@ -225,10 +228,10 @@ shop.orders.get(order_id, **params)                 # => Response   (read-only)
 | `products.create` | `POST add_item` | `POST /product/create` (the gem wraps `{"Request":{"Product":…}}`) | `POST /product/202309/products` |
 | `products.get` | `get_item_base_info` (`item_id_list` = [id]) | `/product/item/get` | `GET /product/202309/products/{id}` |
 | `products.update` | `POST update_item` | `POST /product/update` (the gem sets `ItemId`) | `POST /product/202509/products/{id}/partial_edit` |
-| `products.list` | `get_item_list` | `/products/get` (date-window cursor) | `POST /product/202502/products/search` |
+| `products.list` | `get_item_list` | `/products/get` (offset paging; `PaginationLimitError` at Lazada's offset cap of 10,000) | `POST /product/202502/products/search` |
 | `products.find_by_seller_sku` | `search_item(item_sku:)`: item-level SKU only | `/products/get` `filter=all`, `sku_seller_list=[sku]` | `products/search` `{seller_skus: [sku]}` |
 | `products.unlist` | `unlist_item` `[{item_id, unlist: true}]` | `/product/deactivate` (one `ItemId`) | `POST /product/202309/products/deactivate` |
-| `products.relist` | `unlist_item` `[{item_id, unlist: false}]` | the endpoint must be confirmed from Lazada's official docs before it is implemented | `POST /product/202309/products/activate` (re-audited) |
+| `products.relist` | `unlist_item` `[{item_id, unlist: false}]` | `POST /product/global/update/status` (`type=single`, `status=upShelf`; one product per call). **Cross-border sellers only**: Lazada documents no relist endpoint for local sellers, who use the extension `products.activate_skus` | `POST /product/202309/products/activate` (re-audited) |
 | `stock.get` | `get_model_list` (items without models: stock is on `products.get` `stock_info_v2`) | `/product/item/get` (`skus[].quantity`, `Available`) | `POST /product/202309/inventory/search` (`product_ids` = [id]) |
 | `stock.update` | `update_stock` (≤50) | `/product/price_quantity/update` quantity fields (≤50) | `POST .../products/{id}/inventory/update` |
 | `prices.update` | `update_price` (≤50) | `/product/price_quantity/update` price fields | `POST .../products/{id}/prices/update` |
@@ -252,10 +255,14 @@ method or constant that is neither in this contract nor declared.
 | Shopee | `shop.products.violations(product_ids)` | `get_item_violation_info` | the diagnosis loop |
 | Shopee, TikTok | `shop.products.diagnoses(product_ids)` | `get_item_content_diagnosis_result` / `GET /product/202405/products/diagnoses` | Lazada has no per-id equivalent |
 | Lazada | `shop.products.qc_alerts(**params)` → Pager | `/product/qc/alert/list` | Lazada's QC signal is a list, not per id |
+| Lazada | `shop.products.activate_skus(product_id, sku_ids)` | `POST /product/update` with each SKU's `Status` `"active"` | local sellers have no relist endpoint, so they reactivate SKUs; `relist` serves cross-border sellers only |
+| Lazada | `shop.item_limit` | `GET /product/seller/item/limit` (`GetSellerItemLimit`) | documented for cross-border sellers only; the caller chooses between it and `limits` |
 | Lazada | `shop.orders.items(order_id)` | `/order/items/get` | Lazada splits order lines from the header |
 | TikTok | `shop.products.replace(product_id, payload)` | `PUT /product/202509/products/{id}` | full replace; omitted SKUs are **deleted** |
 | TikTok | `shop.products.check_listing(payload)` | `POST /product/202309/products/listing_check` | the only remote dry run |
 | TikTok | `shop.categories.rules(category_id, **params)` | `GET /product/202309/categories/{id}/rules` | feeds `limits` |
+| Lazada, TikTok | `Client.new(token_base_url:)` and `client.token_base_url` | the token host (Lazada `auth.lazada.com/rest`, TikTok `auth.tiktok-shops.com`) | the token calls are not on the API host (see "Declared constructor keywords") |
+| TikTok | `Client.new(service_id:)` and `client.service_id` | keys the seller consent link | only `auth.authorize_url` needs it |
 
 **Deliberately out of the first release** (reachable through `request`): delete/remove/recover, Shopee
 `batch_add_item`, add/update/delete model and vehicles; Lazada video, image migration, SKU removal, `/images/set`,
@@ -270,7 +277,8 @@ Every non-paged method returns a `Response`, identical in every gem:
 res.data          # frozen Hash or Array, string keys, the platform's payload VERBATIM with the envelope removed
 res.request_id    # String or nil
 res.warnings      # Array<String>: Shopee "warning"; TikTok data.warnings[].message; Lazada []
-res.item_errors   # Array<ItemError>: Shopee failure_list / fail_error; TikTok data.errors[]; Lazada []
+res.item_errors   # Array<ItemError>: Shopee failure_list / fail_error; TikTok data.errors[];
+                  #   Lazada data.update_ic_product_fail_result_list[] (relist), else []
 res.http_status   # Integer
 res.endpoint      # String, the signed path, e.g. "/api/v2/product/add_item"
 res.raw           # frozen Hash, the parsed body exactly as received
@@ -356,7 +364,7 @@ event = client.verify_webhook(raw_body: request.raw_post,
                                                         # raises WebhookSignatureError
 
 event.type          # :authorization_expiring | :deauthorized | :product_status | :other
-event.code          # String, the platform's own event code: "12", "8", "UPCOMING_AUTHORIZATION_EXPIRATION", …
+event.code          # String, the platform's own event code: Shopee "12", Lazada "8", TikTok "7", …
 event.shop_id       # String or nil
 event.occurred_at   # Time
 event.data          # frozen Hash, verbatim
@@ -367,9 +375,9 @@ event.raw
   constant-time and case-insensitive on hex.
 - Shopee: `HMAC(partner_key, url + "|" + raw_body)`; `url:` is the callback URL registered in the console and
   `verify` raises `ArgumentError` when it is nil. Lazada and TikTok: `HMAC(app_secret, app_key + raw_body)`.
-- Type mapping: `:authorization_expiring` = Shopee code 12, Lazada msg_type 8, TikTok
-  `UPCOMING_AUTHORIZATION_EXPIRATION`; `:deauthorized` = TikTok `SELLER_DEAUTHORIZATION` and Shopee code 2;
-  `:product_status` = Lazada msg_type 1 (QC) and TikTok types 5 and 37; anything else `:other`, with `code` set.
+- Type mapping: `:authorization_expiring` = Shopee code 12, Lazada message_type 8, TikTok type 7
+  (`UPCOMING_AUTHORIZATION_EXPIRATION`); `:deauthorized` = TikTok type 6 (`SELLER_DEAUTHORIZATION`) and Shopee code 2;
+  `:product_status` = Lazada message_type 1 (QC) and TikTok types 5 and 37; anything else `:other`, with `code` set.
 - Replying to the webhook (Shopee: 2xx with an **empty body**; Lazada: an OV/EV certificate) is the application's
   job. Each README states it.
 
