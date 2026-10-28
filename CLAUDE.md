@@ -7,7 +7,7 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 - **Public surface is enforced.** `test/conformance/contract.rb` lists every public constant and method with its exact parameters; anything extra must be declared in `lib/lazada_rb_api/extensions.rb`. Internal helpers are `private_constant`.
 - **Hosts live only in `ENDPOINTS`** (`lib/lazada_rb_api/endpoints.rb`): per-country API host plus the shared consent and token hosts. Token calls go to the token host (`token_base_url:`, a declared `Client.new` keyword under contract v2).
 - **Errors are classified by `(code, message, detail)`** in `lib/lazada_rb_api/error_table.rb`; `test/fixtures/error_list.json` holds every documented pair and every one must map to a subclass. Lazada API docs are machine-readable at `https://isvconsole.lazada.com/handler/share/apidoc/getApi.json?path=<path>` (guides: `open.lazada.com/handler/share/doc/getDocDetail.json.json?oeid=LZD_DOC&lang=en_US&docId=<id>`).
-- **Relist is cross-border only** (`/product/global/update/status`); local sellers use the `products.activate_skus` extension. Captain decision 2026-09-19; Lazada has no local-seller relist endpoint.
+- **Relist is cross-border only** (`/product/global/update/status`); local sellers use the `products.activate_skus` extension. My decision 2026-09-19; Lazada has no local-seller relist endpoint.
 - **Fixtures name their source** in `_source` (doc URL and pull date, or "recorded live <date>").
 - **Never publish to RubyGems and never tag 1.0** until the live recording round has replaced the doc fixtures.
 

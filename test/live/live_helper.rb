@@ -16,7 +16,7 @@ require "logger"
 #                        sample. Error responses are never recorded, and neither is any order response
 #                        (/orders/get, /order/get, /order/items/get): orders stay on documentation samples.
 #                        Customer personal data (email, phone, name, nickname, address, and whole recipient or
-#                        buyer objects) is redacted wherever it appears (captain decision 2026-09-20).
+#                        buyer objects) is redacted wherever it appears (my decision 2026-09-20).
 #
 # The live tests only READ. They never refresh a token (the refresh token may be single use) and never write.
 module LiveHelper

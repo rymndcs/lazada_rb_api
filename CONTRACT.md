@@ -8,7 +8,7 @@ This file is the shared interface of three sibling gems: `shopee_rb_api`, `lazad
 It is byte-identical in all three repositories. `test/conformance/` enforces it, and `rake conformance:verify` proves
 that a copy is identical to the canonical one (see "Changing the contract" at the end).
 
-Sources: the shared-interface design approved by the captain on 2026-09-19 ("approve as written"), plus the three
+Sources: the shared-interface design approved by me on 2026-09-19 ("approve as written"), plus the three
 decisions taken the same day:
 
 - `products.relist(product_ids)` joins the first release in all three gems, with the same conventions as `unlist`.
@@ -17,11 +17,11 @@ decisions taken the same day:
   application that uses them: which host, which sandbox, token re-consent schedules and which limit endpoint to rely
   on all belong to the caller.
 
-Version 2 (captain, 2026-09-19, "Contract v2 in all three") adds two things and changes nothing for Shopee: a gem may
+Version 2 (my decision, 2026-09-19, "Contract v2 in all three") adds two things and changes nothing for Shopee: a gem may
 take extra `Client.new` keywords that its `EXTENSIONS` declare (§2), and an `ENDPOINTS` entry may name a separate
 token host with a `token_base_url:` override (§2 "Hosts").
 
-On 2026-09-20 (captain, RAC-275 follow-up) the Lazada and TikTok rows were brought in line with the gems as built:
+On 2026-09-20 (my decision, RAC-275 follow-up) the Lazada and TikTok rows were brought in line with the gems as built:
 text only, no interface change, `CONTRACT_VERSION` stays 2.
 
 "Every gem" means all three.

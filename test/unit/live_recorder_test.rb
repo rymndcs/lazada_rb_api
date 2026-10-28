@@ -28,7 +28,7 @@ class LiveRecorderTest < Minitest::Test
     end
   end
 
-  # Captain decision 2026-09-20: order responses carry real customers' data, so they are never written, even when
+  # My decision 2026-09-20: order responses carry real customers' data, so they are never written, even when
   # they succeed. Orders stay on documentation samples.
   def test_order_responses_are_never_recorded
     Dir.mktmpdir do |dir|
